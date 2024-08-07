@@ -11,7 +11,7 @@ services:
     stdin_open: true
     depends_on:
       - db
-    #command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3306 -b '0.0.0.0'"
 
   db:
     image: mysql:8.0
