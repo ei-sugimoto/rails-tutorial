@@ -1,9 +1,9 @@
 FROM ruby:3.1
 
-RUN mkdir /app
-WORKDIR /app
-COPY ./app/Gemfile /app/Gemfile
-#COPY Gemfile.lock /myapp/Gemfile.lock
+RUN mkdir /src
+WORKDIR /src
+COPY ./src/Gemfile /src/Gemfile
+#COPY Gemfile.lock /mysrc/Gemfile.lock
 
 # Bundlerの不具合対策(1)
 RUN gem update --system
@@ -11,7 +11,7 @@ RUN bundle install
 
 RUN bundle update --bundler
 
-COPY ./app /myapp
+COPY ./src /src
 
 # Add a script to be executed every time the container starts.
 COPY entrypoint.sh /usr/bin/entrypoint.sh
