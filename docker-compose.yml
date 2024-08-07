@@ -1,0 +1,31 @@
+services:
+  rails:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    volumes:
+      - ./app:/app
+    ports:
+      - "8080:8080"
+    tty: true
+    stdin_open: true
+    depends_on:
+      - db
+    #command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+
+  db:
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    platform: linux/amd64
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: hoge
+      MYSQL_USER: users
+      MYSQL_PASSWORD: password
+      TZ: "Asia/Tokyo"
+    volumes:
+      - ./db:/var/lib/mysql
+    command: --default-authentication-plugin=mysql_native_password
+volumes:
+  db:
