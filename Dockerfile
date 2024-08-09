@@ -14,9 +14,9 @@ RUN bundle update --bundler
 COPY ./src /src
 
 # Add a script to be executed every time the container starts.
-COPY entrypoint.sh /usr/bin/entrypoint.sh
-RUN chmod +x /usr/bin/entrypoint.sh
-EXPOSE 3000
+EXPOSE 8080
+
+COPY src/entrypoint.sh usr/bin/entrypoint.sh
 
 # Start the main process.
-CMD ["rails", "server", "-b", "0.0.0.0", "-p", "3306"]
+CMD ["rails", "server", "-p", "8080"]
