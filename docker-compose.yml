@@ -13,19 +13,18 @@ services:
 
     depends_on:
       - db
+
   db:
-    image: mysql:8.0
-    ports:
-      - "3306:3306"
-    platform: linux/amd64
+    image: postgres:12
     environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: hoge
-      MYSQL_USER: users
-      MYSQL_PASSWORD: password
-      TZ: "Asia/Tokyo"
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: tutorial
+    ports:
+      - "5432:5432"
     volumes:
-      - ./db:/var/lib/mysql
-    command: --default-authentication-plugin=mysql_native_password
+      - data:/var/lib/postgresql/data
+    restart: always
+
 volumes:
-  db:
+  data:
